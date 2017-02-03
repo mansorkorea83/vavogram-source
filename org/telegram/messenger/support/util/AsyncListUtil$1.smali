@@ -1,0 +1,342 @@
+.class Lorg/telegram/messenger/support/util/AsyncListUtil$1;
+.super Ljava/lang/Object;
+.source "AsyncListUtil.java"
+
+# interfaces
+.implements Lorg/telegram/messenger/support/util/ThreadUtil$MainThreadCallback;
+
+
+# annotations
+.annotation system Ldalvik/annotation/EnclosingClass;
+    value = Lorg/telegram/messenger/support/util/AsyncListUtil;
+.end annotation
+
+.annotation system Ldalvik/annotation/InnerClass;
+    accessFlags = 0x0
+    name = null
+.end annotation
+
+.annotation system Ldalvik/annotation/Signature;
+    value = {
+        "Ljava/lang/Object;",
+        "Lorg/telegram/messenger/support/util/ThreadUtil$MainThreadCallback",
+        "<TT;>;"
+    }
+.end annotation
+
+
+# instance fields
+.field final synthetic this$0:Lorg/telegram/messenger/support/util/AsyncListUtil;
+
+
+# direct methods
+.method constructor <init>(Lorg/telegram/messenger/support/util/AsyncListUtil;)V
+    .locals 0
+
+    iput-object p1, p0, Lorg/telegram/messenger/support/util/AsyncListUtil$1;->this$0:Lorg/telegram/messenger/support/util/AsyncListUtil;
+
+    invoke-direct {p0}, Ljava/lang/Object;-><init>()V
+
+    return-void
+.end method
+
+.method private isRequestedGeneration(I)Z
+    .locals 1
+
+    iget-object v0, p0, Lorg/telegram/messenger/support/util/AsyncListUtil$1;->this$0:Lorg/telegram/messenger/support/util/AsyncListUtil;
+
+    iget v0, v0, Lorg/telegram/messenger/support/util/AsyncListUtil;->mRequestedGeneration:I
+
+    if-ne p1, v0, :cond_0
+
+    const/4 v0, 0x1
+
+    :goto_0
+    return v0
+
+    :cond_0
+    const/4 v0, 0x0
+
+    goto :goto_0
+.end method
+
+.method private recycleAllTiles()V
+    .locals 3
+
+    const/4 v0, 0x0
+
+    :goto_0
+    iget-object v1, p0, Lorg/telegram/messenger/support/util/AsyncListUtil$1;->this$0:Lorg/telegram/messenger/support/util/AsyncListUtil;
+
+    iget-object v1, v1, Lorg/telegram/messenger/support/util/AsyncListUtil;->mTileList:Lorg/telegram/messenger/support/util/TileList;
+
+    invoke-virtual {v1}, Lorg/telegram/messenger/support/util/TileList;->size()I
+
+    move-result v1
+
+    if-ge v0, v1, :cond_0
+
+    iget-object v1, p0, Lorg/telegram/messenger/support/util/AsyncListUtil$1;->this$0:Lorg/telegram/messenger/support/util/AsyncListUtil;
+
+    iget-object v1, v1, Lorg/telegram/messenger/support/util/AsyncListUtil;->mBackgroundProxy:Lorg/telegram/messenger/support/util/ThreadUtil$BackgroundCallback;
+
+    iget-object v2, p0, Lorg/telegram/messenger/support/util/AsyncListUtil$1;->this$0:Lorg/telegram/messenger/support/util/AsyncListUtil;
+
+    iget-object v2, v2, Lorg/telegram/messenger/support/util/AsyncListUtil;->mTileList:Lorg/telegram/messenger/support/util/TileList;
+
+    invoke-virtual {v2, v0}, Lorg/telegram/messenger/support/util/TileList;->getAtIndex(I)Lorg/telegram/messenger/support/util/TileList$Tile;
+
+    move-result-object v2
+
+    invoke-interface {v1, v2}, Lorg/telegram/messenger/support/util/ThreadUtil$BackgroundCallback;->recycleTile(Lorg/telegram/messenger/support/util/TileList$Tile;)V
+
+    add-int/lit8 v0, v0, 0x1
+
+    goto :goto_0
+
+    :cond_0
+    iget-object v1, p0, Lorg/telegram/messenger/support/util/AsyncListUtil$1;->this$0:Lorg/telegram/messenger/support/util/AsyncListUtil;
+
+    iget-object v1, v1, Lorg/telegram/messenger/support/util/AsyncListUtil;->mTileList:Lorg/telegram/messenger/support/util/TileList;
+
+    invoke-virtual {v1}, Lorg/telegram/messenger/support/util/TileList;->clear()V
+
+    return-void
+.end method
+
+
+# virtual methods
+.method public addTile(ILorg/telegram/messenger/support/util/TileList$Tile;)V
+    .locals 7
+    .annotation system Ldalvik/annotation/Signature;
+        value = {
+            "(I",
+            "Lorg/telegram/messenger/support/util/TileList$Tile",
+            "<TT;>;)V"
+        }
+    .end annotation
+
+    invoke-direct {p0, p1}, Lorg/telegram/messenger/support/util/AsyncListUtil$1;->isRequestedGeneration(I)Z
+
+    move-result v4
+
+    if-nez v4, :cond_1
+
+    iget-object v4, p0, Lorg/telegram/messenger/support/util/AsyncListUtil$1;->this$0:Lorg/telegram/messenger/support/util/AsyncListUtil;
+
+    iget-object v4, v4, Lorg/telegram/messenger/support/util/AsyncListUtil;->mBackgroundProxy:Lorg/telegram/messenger/support/util/ThreadUtil$BackgroundCallback;
+
+    invoke-interface {v4, p2}, Lorg/telegram/messenger/support/util/ThreadUtil$BackgroundCallback;->recycleTile(Lorg/telegram/messenger/support/util/TileList$Tile;)V
+
+    :cond_0
+    return-void
+
+    :cond_1
+    iget-object v4, p0, Lorg/telegram/messenger/support/util/AsyncListUtil$1;->this$0:Lorg/telegram/messenger/support/util/AsyncListUtil;
+
+    iget-object v4, v4, Lorg/telegram/messenger/support/util/AsyncListUtil;->mTileList:Lorg/telegram/messenger/support/util/TileList;
+
+    invoke-virtual {v4, p2}, Lorg/telegram/messenger/support/util/TileList;->addOrReplace(Lorg/telegram/messenger/support/util/TileList$Tile;)Lorg/telegram/messenger/support/util/TileList$Tile;
+
+    move-result-object v0
+
+    if-eqz v0, :cond_2
+
+    const-string/jumbo v4, "AsyncListUtil"
+
+    new-instance v5, Ljava/lang/StringBuilder;
+
+    invoke-direct {v5}, Ljava/lang/StringBuilder;-><init>()V
+
+    const-string/jumbo v6, "duplicate tile @"
+
+    invoke-virtual {v5, v6}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+
+    move-result-object v5
+
+    iget v6, v0, Lorg/telegram/messenger/support/util/TileList$Tile;->mStartPosition:I
+
+    invoke-virtual {v5, v6}, Ljava/lang/StringBuilder;->append(I)Ljava/lang/StringBuilder;
+
+    move-result-object v5
+
+    invoke-virtual {v5}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+
+    move-result-object v5
+
+    invoke-static {v4, v5}, Landroid/util/Log;->e(Ljava/lang/String;Ljava/lang/String;)I
+
+    iget-object v4, p0, Lorg/telegram/messenger/support/util/AsyncListUtil$1;->this$0:Lorg/telegram/messenger/support/util/AsyncListUtil;
+
+    iget-object v4, v4, Lorg/telegram/messenger/support/util/AsyncListUtil;->mBackgroundProxy:Lorg/telegram/messenger/support/util/ThreadUtil$BackgroundCallback;
+
+    invoke-interface {v4, v0}, Lorg/telegram/messenger/support/util/ThreadUtil$BackgroundCallback;->recycleTile(Lorg/telegram/messenger/support/util/TileList$Tile;)V
+
+    :cond_2
+    iget v4, p2, Lorg/telegram/messenger/support/util/TileList$Tile;->mStartPosition:I
+
+    iget v5, p2, Lorg/telegram/messenger/support/util/TileList$Tile;->mItemCount:I
+
+    add-int v1, v4, v5
+
+    const/4 v2, 0x0
+
+    :goto_0
+    iget-object v4, p0, Lorg/telegram/messenger/support/util/AsyncListUtil$1;->this$0:Lorg/telegram/messenger/support/util/AsyncListUtil;
+
+    #getter for: Lorg/telegram/messenger/support/util/AsyncListUtil;->mMissingPositions:Landroid/util/SparseIntArray;
+    invoke-static {v4}, Lorg/telegram/messenger/support/util/AsyncListUtil;->access$300(Lorg/telegram/messenger/support/util/AsyncListUtil;)Landroid/util/SparseIntArray;
+
+    move-result-object v4
+
+    invoke-virtual {v4}, Landroid/util/SparseIntArray;->size()I
+
+    move-result v4
+
+    if-ge v2, v4, :cond_0
+
+    iget-object v4, p0, Lorg/telegram/messenger/support/util/AsyncListUtil$1;->this$0:Lorg/telegram/messenger/support/util/AsyncListUtil;
+
+    #getter for: Lorg/telegram/messenger/support/util/AsyncListUtil;->mMissingPositions:Landroid/util/SparseIntArray;
+    invoke-static {v4}, Lorg/telegram/messenger/support/util/AsyncListUtil;->access$300(Lorg/telegram/messenger/support/util/AsyncListUtil;)Landroid/util/SparseIntArray;
+
+    move-result-object v4
+
+    invoke-virtual {v4, v2}, Landroid/util/SparseIntArray;->keyAt(I)I
+
+    move-result v3
+
+    iget v4, p2, Lorg/telegram/messenger/support/util/TileList$Tile;->mStartPosition:I
+
+    if-gt v4, v3, :cond_3
+
+    if-ge v3, v1, :cond_3
+
+    iget-object v4, p0, Lorg/telegram/messenger/support/util/AsyncListUtil$1;->this$0:Lorg/telegram/messenger/support/util/AsyncListUtil;
+
+    #getter for: Lorg/telegram/messenger/support/util/AsyncListUtil;->mMissingPositions:Landroid/util/SparseIntArray;
+    invoke-static {v4}, Lorg/telegram/messenger/support/util/AsyncListUtil;->access$300(Lorg/telegram/messenger/support/util/AsyncListUtil;)Landroid/util/SparseIntArray;
+
+    move-result-object v4
+
+    invoke-virtual {v4, v2}, Landroid/util/SparseIntArray;->removeAt(I)V
+
+    iget-object v4, p0, Lorg/telegram/messenger/support/util/AsyncListUtil$1;->this$0:Lorg/telegram/messenger/support/util/AsyncListUtil;
+
+    iget-object v4, v4, Lorg/telegram/messenger/support/util/AsyncListUtil;->mViewCallback:Lorg/telegram/messenger/support/util/AsyncListUtil$ViewCallback;
+
+    invoke-virtual {v4, v3}, Lorg/telegram/messenger/support/util/AsyncListUtil$ViewCallback;->onItemLoaded(I)V
+
+    goto :goto_0
+
+    :cond_3
+    add-int/lit8 v2, v2, 0x1
+
+    goto :goto_0
+.end method
+
+.method public removeTile(II)V
+    .locals 4
+
+    invoke-direct {p0, p1}, Lorg/telegram/messenger/support/util/AsyncListUtil$1;->isRequestedGeneration(I)Z
+
+    move-result v1
+
+    if-nez v1, :cond_0
+
+    :goto_0
+    return-void
+
+    :cond_0
+    iget-object v1, p0, Lorg/telegram/messenger/support/util/AsyncListUtil$1;->this$0:Lorg/telegram/messenger/support/util/AsyncListUtil;
+
+    iget-object v1, v1, Lorg/telegram/messenger/support/util/AsyncListUtil;->mTileList:Lorg/telegram/messenger/support/util/TileList;
+
+    invoke-virtual {v1, p2}, Lorg/telegram/messenger/support/util/TileList;->removeAtPos(I)Lorg/telegram/messenger/support/util/TileList$Tile;
+
+    move-result-object v0
+
+    if-nez v0, :cond_1
+
+    const-string/jumbo v1, "AsyncListUtil"
+
+    new-instance v2, Ljava/lang/StringBuilder;
+
+    invoke-direct {v2}, Ljava/lang/StringBuilder;-><init>()V
+
+    const-string/jumbo v3, "tile not found @"
+
+    invoke-virtual {v2, v3}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+
+    move-result-object v2
+
+    invoke-virtual {v2, p2}, Ljava/lang/StringBuilder;->append(I)Ljava/lang/StringBuilder;
+
+    move-result-object v2
+
+    invoke-virtual {v2}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+
+    move-result-object v2
+
+    invoke-static {v1, v2}, Landroid/util/Log;->e(Ljava/lang/String;Ljava/lang/String;)I
+
+    goto :goto_0
+
+    :cond_1
+    iget-object v1, p0, Lorg/telegram/messenger/support/util/AsyncListUtil$1;->this$0:Lorg/telegram/messenger/support/util/AsyncListUtil;
+
+    iget-object v1, v1, Lorg/telegram/messenger/support/util/AsyncListUtil;->mBackgroundProxy:Lorg/telegram/messenger/support/util/ThreadUtil$BackgroundCallback;
+
+    invoke-interface {v1, v0}, Lorg/telegram/messenger/support/util/ThreadUtil$BackgroundCallback;->recycleTile(Lorg/telegram/messenger/support/util/TileList$Tile;)V
+
+    goto :goto_0
+.end method
+
+.method public updateItemCount(II)V
+    .locals 2
+
+    invoke-direct {p0, p1}, Lorg/telegram/messenger/support/util/AsyncListUtil$1;->isRequestedGeneration(I)Z
+
+    move-result v0
+
+    if-nez v0, :cond_0
+
+    :goto_0
+    return-void
+
+    :cond_0
+    iget-object v0, p0, Lorg/telegram/messenger/support/util/AsyncListUtil$1;->this$0:Lorg/telegram/messenger/support/util/AsyncListUtil;
+
+    #setter for: Lorg/telegram/messenger/support/util/AsyncListUtil;->mItemCount:I
+    invoke-static {v0, p2}, Lorg/telegram/messenger/support/util/AsyncListUtil;->access$002(Lorg/telegram/messenger/support/util/AsyncListUtil;I)I
+
+    iget-object v0, p0, Lorg/telegram/messenger/support/util/AsyncListUtil$1;->this$0:Lorg/telegram/messenger/support/util/AsyncListUtil;
+
+    iget-object v0, v0, Lorg/telegram/messenger/support/util/AsyncListUtil;->mViewCallback:Lorg/telegram/messenger/support/util/AsyncListUtil$ViewCallback;
+
+    invoke-virtual {v0}, Lorg/telegram/messenger/support/util/AsyncListUtil$ViewCallback;->onDataRefresh()V
+
+    iget-object v0, p0, Lorg/telegram/messenger/support/util/AsyncListUtil$1;->this$0:Lorg/telegram/messenger/support/util/AsyncListUtil;
+
+    iget-object v1, p0, Lorg/telegram/messenger/support/util/AsyncListUtil$1;->this$0:Lorg/telegram/messenger/support/util/AsyncListUtil;
+
+    iget v1, v1, Lorg/telegram/messenger/support/util/AsyncListUtil;->mRequestedGeneration:I
+
+    iput v1, v0, Lorg/telegram/messenger/support/util/AsyncListUtil;->mDisplayedGeneration:I
+
+    invoke-direct {p0}, Lorg/telegram/messenger/support/util/AsyncListUtil$1;->recycleAllTiles()V
+
+    iget-object v0, p0, Lorg/telegram/messenger/support/util/AsyncListUtil$1;->this$0:Lorg/telegram/messenger/support/util/AsyncListUtil;
+
+    const/4 v1, 0x0
+
+    #setter for: Lorg/telegram/messenger/support/util/AsyncListUtil;->mAllowScrollHints:Z
+    invoke-static {v0, v1}, Lorg/telegram/messenger/support/util/AsyncListUtil;->access$102(Lorg/telegram/messenger/support/util/AsyncListUtil;Z)Z
+
+    iget-object v0, p0, Lorg/telegram/messenger/support/util/AsyncListUtil$1;->this$0:Lorg/telegram/messenger/support/util/AsyncListUtil;
+
+    #calls: Lorg/telegram/messenger/support/util/AsyncListUtil;->updateRange()V
+    invoke-static {v0}, Lorg/telegram/messenger/support/util/AsyncListUtil;->access$200(Lorg/telegram/messenger/support/util/AsyncListUtil;)V
+
+    goto :goto_0
+.end method
