@@ -1,4 +1,4 @@
-.class public final Lcom/parsitelg/telegram/R;
+.class public final Lir/vavogram1/rashidi/R;
 .super Ljava/lang/Object;
 .source "R.java"
 
@@ -6,23 +6,23 @@
 # annotations
 .annotation system Ldalvik/annotation/MemberClasses;
     value = {
-        Lcom/parsitelg/telegram/R$styleable;,
-        Lcom/parsitelg/telegram/R$xml;,
-        Lcom/parsitelg/telegram/R$style;,
-        Lcom/parsitelg/telegram/R$string;,
-        Lcom/parsitelg/telegram/R$raw;,
-        Lcom/parsitelg/telegram/R$plurals;,
-        Lcom/parsitelg/telegram/R$mipmap;,
-        Lcom/parsitelg/telegram/R$layout;,
-        Lcom/parsitelg/telegram/R$integer;,
-        Lcom/parsitelg/telegram/R$id;,
-        Lcom/parsitelg/telegram/R$drawable;,
-        Lcom/parsitelg/telegram/R$dimen;,
-        Lcom/parsitelg/telegram/R$color;,
-        Lcom/parsitelg/telegram/R$bool;,
-        Lcom/parsitelg/telegram/R$attr;,
-        Lcom/parsitelg/telegram/R$array;,
-        Lcom/parsitelg/telegram/R$anim;
+        Lir/vavogram1/rashidi/R$styleable;,
+        Lir/vavogram1/rashidi/R$xml;,
+        Lir/vavogram1/rashidi/R$style;,
+        Lir/vavogram1/rashidi/R$string;,
+        Lir/vavogram1/rashidi/R$raw;,
+        Lir/vavogram1/rashidi/R$plurals;,
+        Lir/vavogram1/rashidi/R$mipmap;,
+        Lir/vavogram1/rashidi/R$layout;,
+        Lir/vavogram1/rashidi/R$integer;,
+        Lir/vavogram1/rashidi/R$id;,
+        Lir/vavogram1/rashidi/R$drawable;,
+        Lir/vavogram1/rashidi/R$dimen;,
+        Lir/vavogram1/rashidi/R$color;,
+        Lir/vavogram1/rashidi/R$bool;,
+        Lir/vavogram1/rashidi/R$attr;,
+        Lir/vavogram1/rashidi/R$array;,
+        Lir/vavogram1/rashidi/R$anim;
     }
 .end annotation
 
