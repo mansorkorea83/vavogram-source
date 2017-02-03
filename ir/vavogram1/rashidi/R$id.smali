@@ -1,4 +1,4 @@
-.class public final Lcom/parsitelg/telegram/R$id;
+.class public final Lir/vavogram1/rashidi/R$id;
 .super Ljava/lang/Object;
 .source "R.java"
 
